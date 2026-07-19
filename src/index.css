@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap");
+
+@theme {
+  /* Font Families */
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-brutal: "Syne", sans-serif;
+
+  /* Animasi yang didaftarkan ke Tailwind */
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-float-slow: float-slow 5s ease-in-out infinite;
+  --animate-slide-stripes: slideStripes 1.2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes slideStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+.custom-marquee-stripes {
+  animation: slideStripes 1.2s linear infinite !important;
+}
+
+.card-stripes {
+  background-image: linear-gradient(
+    45deg,
+    #000000 25%,
+    transparent 25%,
+    transparent 50%,
+    #000000 50%,
+    #000000 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+}
+
+.group:hover .card-stripes {
+  animation: slideStripes 0.8s linear infinite;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
