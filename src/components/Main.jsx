@@ -9,7 +9,7 @@ const Main = () => {
       <Nav />
       <Hero />
       <About />
-      <Projects/>
+      <Projects />
     </div>
   );
 };

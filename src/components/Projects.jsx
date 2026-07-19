@@ -89,12 +89,12 @@ const Projects = () => {
       ],
       images: [
         "/images/loginSparepart.png",
-        "/images/dashboardSPAREPART.png", 
-        "/images/SPAREPART.png", 
-        "/images/bmSPAREPART.png", 
-        "/images/bkSPAREPART.png", 
-        "/images/RBM.png", 
-        "/images/RBK.png", 
+        "/images/dashboardSPAREPART.png",
+        "/images/SPAREPART.png",
+        "/images/bmSPAREPART.png",
+        "/images/bkSPAREPART.png",
+        "/images/RBM.png",
+        "/images/RBK.png",
       ],
       shortDesc:
         "Aplikasi desktop untuk manajemen inventaris sparepart dengan UI modern.",
@@ -203,21 +203,21 @@ const Projects = () => {
 
               <div className="mb-6 flex justify-center w-full">
                 <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 scrollbar-none items-center w-full justify-start">
-    {selectedProject.images.map((img, idx) => (
-      <div
-        key={idx}
-        className="w-full shrink-0 snap-center flex justify-center"
-      >
-        <div className="border-4 border-black bg-white p-2 flex items-center justify-center w-full shadow-sm">
-          <div className="bg-zinc-50 border-2 border-black p-3 sm:p-5 w-full flex justify-center items-center aspect-16/10 sm:aspect-video overflow-hidden">
-            <img
-              src={img}
-              alt="Preview"
-              className="w-full h-full max-w-full sm:max-w-max object-contain"
-            />
-          </div>
-        </div>
-        </div>
+                  {selectedProject.images.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="w-full shrink-0 snap-center flex justify-center"
+                    >
+                      <div className="border-4 border-black bg-white p-2 flex items-center justify-center w-full shadow-sm">
+                        <div className="bg-zinc-50 border-2 border-black p-3 sm:p-5 w-full flex justify-center items-center aspect-16/10 sm:aspect-video overflow-hidden">
+                          <img
+                            src={img}
+                            alt="Preview"
+                            className="w-full h-full max-w-full sm:max-w-max object-contain"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
