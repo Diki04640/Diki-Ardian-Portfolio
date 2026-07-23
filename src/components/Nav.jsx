@@ -29,12 +29,7 @@ const Nav = () => {
     setIsSending(true);
 
     emailjs
-      .sendForm(
-        "service_25rki5o",
-        "9ueaio9",
-        formRef.current,
-        "BWsTQCVAf95onVbiu",
-      )
+      .sendForm("25rki5o", "34yzlkb", formRef.current, "BWsTQCVAf95onVbiu")
       .then(
         () => {
           setToast({
