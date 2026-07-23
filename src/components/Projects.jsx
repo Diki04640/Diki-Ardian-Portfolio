@@ -199,7 +199,6 @@ const Projects = () => {
         ></div>
       </section>
 
-      {/* Render modal detail secara langsung di atas halaman */}
       {selectedProject && (
         <Detail
           project={selectedProject}
