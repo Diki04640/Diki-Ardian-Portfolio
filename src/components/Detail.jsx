@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoClose, IoGlobeOutline } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import {
@@ -15,13 +15,6 @@ import "yet-another-react-lightbox/styles.css";
 const Detail = ({ project, onBack }) => {
   const [isOpenLightbox, setIsOpenLightbox] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
 
   if (!project) return null;
 
@@ -40,10 +33,7 @@ const Detail = ({ project, onBack }) => {
   };
 
   return (
-    /* Container luar memiliki overflow-y-auto agar aman di semua ukuran layar */
     <div className="fixed inset-0 z-[999] bg-black/75 backdrop-blur-sm p-4 sm:p-6 md:p-10 flex items-center justify-center overflow-y-auto hide-scrollbar">
-      
-      {/* Modal Card dengan max-height dan overflow tersendiri */}
       <div className="relative w-full max-w-4xl max-h-[85vh] bg-white border-4 border-black p-6 sm:p-10 shadow-[12px_12px_0px_0px_rgba(255,192,203,1)] overflow-y-auto hide-scrollbar my-auto">
         <button
           onClick={onBack}
