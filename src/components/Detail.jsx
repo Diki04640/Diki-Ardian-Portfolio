@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoClose, IoGlobeOutline } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
 import {
@@ -9,43 +9,41 @@ import {
   HiOutlineCode,
 } from "react-icons/hi";
 
+// Import Lightbox dan CSS-nya
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
 const Detail = ({ project, onBack }) => {
+  // State untuk mengontrol Lightbox
+  const [isOpenLightbox, setIsOpenLightbox] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
   if (!project) return null;
 
   const imageList =
     project.images && project.images.length > 0
       ? project.images
       : project.image
-      ? [project.image]
-      : [];
+        ? [project.image]
+        : [];
+
+  const slides = imageList.map((src) => ({ src }));
+
+  const handleImageClick = (idx) => {
+    setPhotoIndex(idx);
+    setIsOpenLightbox(true);
+  };
 
   return (
-    <div className="fixed inset-0 z-999 bg-black/75 backdrop-blur-sm p-4 sm:p-6 md:p-10 flex items-center justify-center overflow-y-auto">
-      <style>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-
-        .custom-brutal-scrollbar::-webkit-scrollbar {
-          height: 10px;
-        }
-        .custom-brutal-scrollbar::-webkit-scrollbar-track {
-          background: #e4e4e7;
-          border: 2px solid #000;
-        }
-        .custom-brutal-scrollbar::-webkit-scrollbar-thumb {
-          background: #000;
-        }
-        .custom-brutal-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #db2777;
-        }
-      `}</style>
-
-      <div className="relative w-full max-w-4xl max-h-[90vh] bg-white border-4 border-black p-6 sm:p-10 shadow-[12px_12px_0px_0px_rgba(255,192,203,1)] overflow-y-auto hide-scrollbar my-auto">
+    <div className="fixed inset-0 z-999 bg-black/75 backdrop-blur-sm p-4 sm:p-6 md:p-10 flex items-center justify-center">
+      <div className="relative w-full max-w-4xl max-h-[90vh] bg-white border-4 border-black p-6 sm:p-10 shadow-[12px_12px_0px_0px_rgba(255,192,203,1)] overflow-y-auto hide-scrollbar">
         <button
           onClick={onBack}
           className="absolute top-4 right-4 bg-pink-600 text-white border-3 border-black p-2 font-brutal shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:bg-black transition-all cursor-pointer z-20"
@@ -86,7 +84,8 @@ const Detail = ({ project, onBack }) => {
           {project.challenge && (
             <div className="bg-red-50 border-3 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <h3 className="font-brutal text-sm font-black uppercase mb-1 text-black border-b-2 border-black pb-1 flex items-center gap-1.5">
-                <HiOutlineExclamationCircle className="text-lg text-red-600" /> Tantangan
+                <HiOutlineExclamationCircle className="text-lg text-red-600" />{" "}
+                Tantangan
               </h3>
               <p className="font-sans text-xs text-zinc-700 font-bold leading-relaxed">
                 {project.challenge}
@@ -108,7 +107,8 @@ const Detail = ({ project, onBack }) => {
           {project.outcome && (
             <div className="bg-emerald-50 border-3 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
               <h3 className="font-brutal text-sm font-black uppercase mb-1 text-black border-b-2 border-black pb-1 flex items-center gap-1.5">
-                <HiOutlineCheckCircle className="text-lg text-emerald-600" /> Hasil
+                <HiOutlineCheckCircle className="text-lg text-emerald-600" />{" "}
+                Hasil
               </h3>
               <p className="font-sans text-xs text-zinc-700 font-bold leading-relaxed">
                 {project.outcome}
@@ -137,18 +137,20 @@ const Detail = ({ project, onBack }) => {
           </div>
         </div>
 
+        {/* Galeri Gambar (Tanpa Zoom Effect & Bisa Diklik) */}
         {imageList.length > 0 && (
           <div className="border-t-3 border-black pt-6 mb-8">
             <div className="flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory custom-brutal-scrollbar">
               {imageList.map((img, idx) => (
                 <div
                   key={idx}
-                  className="snap-center shrink-0 w-70 sm:w-90 group"
+                  onClick={() => handleImageClick(idx)}
+                  className="snap-center shrink-0 w-70 sm:w-90 cursor-pointer"
                 >
                   <img
                     src={img}
                     alt={`Preview ${idx + 1}`}
-                    className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-auto object-contain border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
                   />
                 </div>
               ))}
@@ -179,6 +181,13 @@ const Detail = ({ project, onBack }) => {
           )}
         </div>
       </div>
+
+      <Lightbox
+        open={isOpenLightbox}
+        close={() => setIsOpenLightbox(false)}
+        index={photoIndex}
+        slides={slides}
+      />
     </div>
   );
 };

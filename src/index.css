@@ -3,18 +3,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap");
 
 @theme {
-  /* Font Families */
   --font-sans: "Space Grotesk", sans-serif;
   --font-brutal: "Syne", sans-serif;
 
-  /* Animasi yang didaftarkan ke Tailwind */
   --animate-marquee: marquee 25s linear infinite;
   --animate-float: float 4s ease-in-out infinite;
   --animate-float-slow: float-slow 5s ease-in-out infinite;
   --animate-slide-stripes: slideStripes 1.2s linear infinite;
 }
 
-/* Keyframes */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
@@ -57,8 +54,35 @@
   animation: slideStripes 0.8s linear infinite;
 }
 
-html,
-body {
-  overflow-x: hidden;
-  max-width: 100%;
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-brutal-scrollbar::-webkit-scrollbar {
+  height: 10px;
+}
+.custom-brutal-scrollbar::-webkit-scrollbar-track {
+  background: #e4e4e7;
+  border: 2px solid #000;
+}
+.custom-brutal-scrollbar::-webkit-scrollbar-thumb {
+  background: #000;
+}
+.custom-brutal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #db2777;
 }
